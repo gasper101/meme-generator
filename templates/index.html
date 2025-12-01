@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meme Generator</title>
+    <style>
+        body { 
+            font-family: sans-serif; 
+            background-color: #f4f4f9; 
+            display: flex; 
+            justify-content: center; 
+            padding: 20px; 
+        }
+        .container { 
+            background: white; 
+            padding: 30px; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+            max-width: 600px; 
+            width: 100%; 
+            text-align: center; 
+        }
+        h1 { 
+            color: #333; 
+        }
+        input[type="text"], input[type="file"] { 
+            width: 90%; 
+            padding: 10px; 
+            margin: 10px 0; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+        }
+        button { 
+            background-color: #28a745; 
+            color: white; 
+            padding: 12px 20px; 
+            border: none; 
+            border-radius: 5px; 
+            cursor: pointer; 
+            font-size: 16px; 
+            width: 100%; 
+        }
+        button:hover { 
+            background-color: #218838; 
+        }
+        .result { 
+            margin-top: 30px; 
+        }
+        img { 
+            max-width: 100%; 
+            height: auto; 
+            border: 1px solid #ddd; 
+            border-radius: 5px; 
+        }
+        .error { 
+            color: red; 
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Meme Generator</h1>
+    
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="slika" accept="image/*" required><br>
+        
+        <input type="text" name="zgornji_tekst" placeholder="Zgornji tekst"><br>
+        <input type="text" name="spodnji_tekst" placeholder="Spodnji tekst"><br>
+        
+        <button type="submit">Generiraj Meme</button>
+    </form>
+
+    {% if error %}
+        <p class="error">{{ error }}</p>
+    {% endif %}
+
+    {% if generated_image %}
+        <div class="result">
+            <h2>Vaš Meme:</h2>
+            <img src="data:image/jpeg;base64,{{ generated_image }}" alt="Generiran Meme">
+            <br><br>
+            <a href="/">Ustvari novega</a>
+        </div>
+    {% endif %}
+</div>
+
+</body>
+</html>
